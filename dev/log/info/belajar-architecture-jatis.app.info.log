@@ -1,0 +1,24 @@
+{"@time":"2024-04-22 00:51:50.887","level":"info","msg":"Receiving signal: interrupt"}
+{"@time":"2024-04-22 00:51:50.901","level":"info","msg":"Successfully disconnected from MongoDB."}
+{"@time":"2024-04-22 00:51:52.887","level":"info","msg":"Successfully connected to MongoDB."}
+{"@time":"2024-04-22 00:51:52.887","level":"info","msg":"Server running at: :3001"}
+{"@time":"2024-04-22 00:53:58.224","level":"info","msg":"Receiving signal: interrupt"}
+{"@time":"2024-04-22 00:53:58.226","level":"info","msg":"Successfully disconnected from MongoDB."}
+{"@time":"2024-04-22 00:54:00.252","level":"info","msg":"Successfully connected to MongoDB."}
+{"@time":"2024-04-22 00:54:00.252","level":"info","msg":"Server running at: :3001"}
+{"@time":"2024-04-22 00:56:33.821","level":"info","msg":"Receiving signal: interrupt"}
+{"@time":"2024-04-22 00:56:33.824","level":"info","msg":"Successfully disconnected from MongoDB."}
+{"@time":"2024-04-22 20:07:20.125","level":"info","msg":"Successfully connected to MongoDB."}
+{"@time":"2024-04-22 20:07:20.125","level":"info","msg":"Server running at: :3001"}
+{"@time":"2024-04-22 20:17:52.828","CLIENT_IP":"::1","LATENCY":3138208,"METHOD":"GET","STATUS":200,"URI":"/ping","level":"info","msg":"HTTP REQUEST"}
+{"@time":"2024-04-22 21:08:07.247","level":"info","msg":"Receiving signal: interrupt"}
+{"@time":"2024-04-22 21:08:07.259","level":"info","msg":"Successfully disconnected from MongoDB."}
+{"@time":"2024-04-22 21:08:10.417","level":"info","msg":"Successfully connected to MongoDB."}
+{"@time":"2024-04-22 21:08:10.418","level":"info","msg":"Server running at: :3001"}
+{"@time":"2024-04-22 21:09:36.974","CLIENT_IP":"::1","LATENCY":2160000,"METHOD":"POST","STATUS":200,"URI":"/chatbot","level":"info","msg":"HTTP REQUEST"}
+{"@time":"2024-04-22 21:11:24.685","CLIENT_IP":"::1","LATENCY":6950334,"METHOD":"POST","STATUS":401,"URI":"/chatbot","level":"info","msg":"HTTP REQUEST"}
+{"@time":"2024-04-22 21:11:34.598","CLIENT_IP":"::1","LATENCY":941083,"METHOD":"POST","STATUS":401,"URI":"/chatbot","level":"info","msg":"HTTP REQUEST"}
+{"@time":"2024-04-22 21:11:37.008","CLIENT_IP":"::1","LATENCY":26333,"METHOD":"POST","STATUS":200,"URI":"/chatbot","level":"info","msg":"HTTP REQUEST"}
+{"@time":"2024-04-22 21:11:55.529","CLIENT_IP":"::1","LATENCY":599417,"METHOD":"POST","STATUS":401,"URI":"/chatbot","level":"info","msg":"HTTP REQUEST"}
+{"@time":"2024-04-22 21:12:18.546","level":"info","msg":"Receiving signal: interrupt"}
+{"@time":"2024-04-22 21:12:18.569","level":"info","msg":"Successfully disconnected from MongoDB."}
