@@ -9,12 +9,10 @@ import (
 	"chatbot/dev/repository"
 	"chatbot/dev/util"
 	"errors"
-	// "strconv"
+	"strconv"
 	"strings"
 	"github.com/gin-gonic/gin"
 )
-
-
 
 type ChabotService interface {
 	Chatbot(ctx *gin.Context) (successResponse response.SuccessResponse, status int, err error)
@@ -147,7 +145,35 @@ func (p * ChatbotServiceImpl) Chatbot(ctx *gin.Context) (successResponse respons
 		successResponse = prepareSuccessResponse(chatHistoryId, selected.Response)
 		return
 	}
+	
+	// CASE 3: when the request does not containt in options select and when submit crd
+	var noOptionRes string
+	if(chatbot.Title == util.Configuration.Chatbot.SubmitCrdTitle){
+		userPointAddition := user.Point + util.Configuration.Chatbot.AdditionalPoint
+		user.Point = userPointAddition
+		user.LatestChatbotID = ""
+		err = p.userRepository.UpdateUserRepository(ctx, user)
+		if (err != nil){
+			if (errors.Is(err, err_helper.ErrRepositoryNotFound)){
+				err = err_helper.ErrServiceUnauthorized
+				return
+			}
+			return
+		}
+		noOptionRes = util.Configuration.Chatbot.SuccessSubmitCRD + " " + strconv.Itoa(userPointAddition)
+	} else {
+		selectedDefault, _ := findChatbotAnswer(chatbot.Options, "default")
+		noOptionRes =  util.Configuration.Chatbot.FailedRequest + "\n" + selectedDefault.Response
+	}
 
+	chatHistory = prepareChatHistory(user.ID.Hex(), user.ClientID, payload.Text, noOptionRes, payload.Timestamp)
+	chatHistoryId, errr := p.chatHistoryRepository.CreateChatHistory(ctx, chatHistory)
+	if (errr != nil) {
+		err = errr
+		return
+	}
+
+	successResponse = prepareSuccessResponse(chatHistoryId, noOptionRes)
 	return
 }
 
