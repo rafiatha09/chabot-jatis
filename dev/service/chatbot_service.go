@@ -92,7 +92,7 @@ func (p * ChatbotServiceImpl) Chatbot(ctx *gin.Context) (successResponse respons
 	}
 	
 	var chatHistory entity.ChatHistory
-	_ , chatbotErr := p.chatbotRepository.GetChatbotRepository(ctx, user.LatestChatbotID, "", user.ClientID)
+	chatbot , chatbotErr := p.chatbotRepository.GetChatbotRepository(ctx, user.LatestChatbotID, "", user.ClientID)
 
 	// CASE 1: when first step and no chatbot data
 	if (user.LatestChatbotID == "" || chatbotErr != nil){
@@ -123,8 +123,31 @@ func (p * ChatbotServiceImpl) Chatbot(ctx *gin.Context) (successResponse respons
 		successResponse = prepareSuccessResponse(chatHistoryId, selected.Response)
 		return
 	}
+	
+	// CASE 2: when the request containts in options select
+	selected, isInOption := findChatbotAnswer(chatbot.Options, payload.Text)
+	if (isInOption){
+		user.LatestChatbotID = selected.RelatedChatbotID
+		err = p.userRepository.UpdateUserRepository(ctx, user)
+		if (err != nil){
+			if (errors.Is(err, err_helper.ErrRepositoryNotFound)){
+				err = err_helper.ErrServiceUnauthorized
+				return
+			}
+			return
+		}
 
-	// successResponse = prepareSuccessResponse(chatHistoryId, noOptionRes)
+		chatHistory = prepareChatHistory(user.ID.Hex(), user.ClientID, payload.Text, selected.Response, payload.Timestamp)
+		chatHistoryId, errr := p.chatHistoryRepository.CreateChatHistory(ctx, chatHistory)
+		if (errr != nil) {
+			err = errr
+			return
+		}
+
+		successResponse = prepareSuccessResponse(chatHistoryId, selected.Response)
+		return
+	}
+
 	return
 }
 
