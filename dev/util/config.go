@@ -46,10 +46,13 @@ type Config struct {
 		LocalTime  bool   `mapstructure:"local_time"`
 	} `mapstructure:"logger"`
 	
-	ChatbotMessage struct {
-		WelcomeMessageTitle string `mapstructure:"welcome"`
-		SubmitCrdTitle string `mapstructure:"submit_crd"`
-	} `mapstructure:"chatbot_message"`
+	Chatbot struct {
+		WelcomeTitle string `mapstructure:"welcome_message"`
+		SubmitCrdTitle string `mapstructure:"submit_crd_message"`
+		AdditionalPoint int `mapstructure:"additional_point"`
+		SuccessSubmitCRD string `mapstructure:"success_submit_crd"`
+		FailedRequest string `mapstructure:"failed_request"`
+	} `mapstructure:"chatbot"`
 
 }
 

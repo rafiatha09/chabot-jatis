@@ -24,6 +24,9 @@ logger:
   max_age: 90 # in days, set 0 for unlimited days
   compress: true
   local_time: true
-chatbot_message:
-  welcome: welcome_message
-  submit_crd: submit_crd_message
+chatbot:
+  welcome_message: welcome_message
+  submit_crd_message: submit_crd_message
+  additional_point: 10
+  success_submit_crd: Terima kasih terlah submit kode crd, point anda saat ini
+  failed_request: Maaf kami tidak mengerti

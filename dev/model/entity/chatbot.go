@@ -1,7 +1,9 @@
 package entity
 
+import "go.mongodb.org/mongo-driver/bson/primitive"
+
 type Chatbot struct {
-	ID              string 			   `bson:"_id" json:"_id"`
+	ID              primitive.ObjectID   			   `bson:"_id" json:"_id"`
 	ClientID        string             `bson:"client_id" json:"client_id"`
 	ParentChatbotID string             `bson:"parent_chatbot_id" json:"parent_chabot_id,omitempty"`
 	Title           string             `bson:"title" json:"title"`

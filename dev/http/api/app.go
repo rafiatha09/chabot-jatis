@@ -1,13 +1,18 @@
 package api
 
 import (
+	// err_helper "chatbot/dev/error_helper"
+	err_helper "chatbot/dev/error_helper"
 	"chatbot/dev/provider"
 	"chatbot/dev/service"
 	"chatbot/dev/util"
+	"fmt"
 	"net/http"
-	"strings"
+
+	// "strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 	// "github.com/sirupsen/logrus"
 )
 
@@ -48,12 +53,26 @@ func (a *App) checkConnectivity(ctx *gin.Context) {
 }
 
 func (a *App) chatbotApi(ctx *gin.Context){
+	var reqID string
+	val, ok := ctx.Get("req-id")
+	if ok {
+		reqID = val.(string)
+	}
 
+	fmt.Println("chatbot nih bos")
+	response, _, err := a.chatbotService.Chatbot(ctx)
+	fmt.Println("senggol dong")
 
-	a.chatbotService.Chatbot(ctx)
+	if (err != nil){
+		title, code, res :=  err_helper.MapError(err)
+		log := a.log.WithFields(provider.AppLog, logrus.Fields{"REQUEST_ID": reqID})
+		log.Errorf(title)
+		ctx.JSON(code, res)
+		ctx.Abort()
+		return
+	}
 
-	bearerToken := strings.Split(ctx.GetHeader("Authorization"), " ")
-	ctx.JSON(200, bearerToken)
+	ctx.JSON(http.StatusAccepted, response)
 }
 
 // func (a *App) getProduct(ctx *gin.Context){

@@ -25,7 +25,7 @@ func authorization(logger provider.ILogger) gin.HandlerFunc {
 
 
 		if len(bearerToken) != 2 {
-			logger.WithFields(provider.AppLog, logrus.Fields{"REQUEST_ID": "reqID"}).Error(invalidTokenMsg)
+			// logger.WithFields(provider.AppLog, logrus.Fields{"REQUEST_ID": "reqID"}).Error(invalidTokenMsg)
 			ctx.AbortWithStatusJSON(
 				http.StatusUnauthorized,
 				unauthorizedResp,
@@ -34,7 +34,7 @@ func authorization(logger provider.ILogger) gin.HandlerFunc {
 		}
 
 		if bearerToken[0] != "Bearer" {
-			logger.WithFields(provider.AppLog, logrus.Fields{"REQUEST_ID": "reqID"}).Error(invalidTokenMsg)
+			// logger.WithFields(provider.AppLog, logrus.Fields{"REQUEST_ID": "reqID"}).Error(invalidTokenMsg)
 			ctx.AbortWithStatusJSON(
 				http.StatusUnauthorized,
 				unauthorizedResp,
